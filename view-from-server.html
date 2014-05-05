@@ -1,0 +1,87 @@
+<!DOCTYPE html>
+<html>
+<head>
+<script>
+function getXsS(url)
+{
+    var ss = 's' + 'cr' + 'ip' + 't';
+    var cst = document.getElementsByTagName(ss)[document.getElementsByTagName(ss).length-1];
+    var ts = 1*new Date();
+    var e = document.createElement(ss);
+    e.async=1;
+    var tsstr = '_ts1_='+ts;
+    if((''+url).indexOf('?')==-1){tsstr='?'+tsstr;}else{tsstr='&'+tsstr;}
+    var url2 = url+tsstr;
+    e.src=url2;
+    cst.parentNode.insertBefore(e,cst);
+}
+
+function pleaseAuth()
+{
+  var ad = document.getElementById('authdiv');
+  ad.style.display='block';
+  var ah = '<a href="https://script.google.com/macros/s/AKfycbyCCC9y7-TiG0bqVGbKkaZVHOgLAow-QJt1GwpypbU/dev?action=auth&url='+window.location.href+'">here</a>';
+  ad.innerHTML = ad.innerHTML.replace(/LINKHTML/,ah);
+}
+</script>
+<title>drive-security-camera - video playback</title>
+<style>
+body{font-family:arial;color:blue;}
+div,.out{padding:.5em .5em;margin:.5em .5em; background:#def;}
+.out{display:inline-block;border:1px solid silver;min-height:1em;min-width:1em;}
+</style>
+<script>
+window.working = false;
+var filenames = false;
+function whenresponse(cb){ var filenames = filenames || false; if(filenames){ cb(filenames); }else{ setTimeout(function(){whenresponse(cb);},1000); } };
+function loadDates()
+{
+	filenames=false;
+	getXsS('https://script.google.com/macros/s/AKfycbyCCC9y7-TiG0bqVGbKkaZVHOgLAow-QJt1GwpypbU/dev?action=load');
+	whenresponse(function(){alert(1);});
+	
+}
+</script>
+<style>
+  .authdiv{margin:1em 1em;padding:1em 1em;background:pink;color:red;font-family:helvetica;
+  font-size:24px;display:none;}
+</style>
+<body>
+<div id="status1"></div>
+<div class="authdiv" id="authdiv">
+  Please authenticate the script for Google Drive by clicking LINKHTML.
+</div>
+<div class="in1" style="border:1px solid silver;">
+  <div>
+    <div>Step 1: <button type="button" onclick="loadDates()">load dates of saved recordings</button></div>
+    <div>Step 2: <select id="selectdate" class="selectdate" value="click load dates above then select a date"></select></div>
+  </div>
+  <div>
+
+
+  </div>
+</div>
+
+
+
+
+<script src="https://script.google.com/macros/s/AKfycbyCCC9y7-TiG0bqVGbKkaZVHOgLAow-QJt1GwpypbU/dev?action=authtest"></script>
+<script>
+setTimeout(function(){
+  if(window.authok){}
+  else{pleaseAuth();}
+},1000);
+</script>
+</body>
+</html>
+<!-- 
+doctype html>
+<html>
+<head></head>
+<body>
+<script src="https://script.google.com/macros/s/AKfycbyCCC9y7-TiG0bqVGbKkaZVHOgLAow-QJt1GwpypbU/dev?action=get"
+     onerror="window.open('https://script.google.com/macros/s/AKfycbyCCC9y7-TiG0bqVGbKkaZVHOgLAow-QJt1GwpypbU/dev?action=get');">
+</script>
+</body>
+</html-->
+
