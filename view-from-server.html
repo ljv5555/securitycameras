@@ -54,6 +54,7 @@ function listDates()
 function getDataCb(dataArray)
 {
 	log('got data. length='+dataArray.length,5000);
+	document.getElementById('outputdiv').innerHTML=objectArrayToTable(dataArray);
 }
 function getData()
 {
@@ -93,15 +94,35 @@ setTimeout(function(){
     <div>Step 2: <select id="selectdate" class="selectdate" value="click list dates above then select a date"><option>click list dates above then select a date</option></option></select></div>
     <div>Step 3: <button type="button" onclick="getData();">get data for date</button></div>
   </div>
-  <div>
+  <div id="outputdiv" class="outputdiv">
 
 
   </div>
 </div>
 
 
-
-
+<script src="https://cdnjs.cloudflare.com/ajax/libs/underscore.js/1.6.0/underscore-min.js"></script>
+<script>
+	
+    function objectArrayToTable(o)
+    {
+        var rtn = '<table><tr>';
+        var headers = _.unique(_.flatten(_.map(o,function(e){return _.keys(e);}),true)).sort();
+        _.each(headers,function(o){rtn+='<th>'+_.escape(o)+'</th>';});
+        rtn+='</tr>';
+       
+        _.each(o,function(oe){
+            rtn+='<tr>'; 
+            _.each(headers,function(o2){rtn+='<td>'+_.escape(
+                _.isObject(oe[o2])?JSON.stringify(oe[o2]):oe[o2]
+                                                            )+'</td>';});
+            rtn+='</tr>';
+        });
+        rtn+='</table>';
+        return rtn;
+    }
+	
+</script>
 
 </body>
 </html>
