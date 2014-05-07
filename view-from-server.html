@@ -118,7 +118,7 @@ setTimeout(function(){
             	            _.each(headers,function(o2){rtn+='<td>'+(
 		                _.isObject(oe[o2])?JSON.stringify(oe[o2]):
 		                
-		                (o2==='date'?''+new Date(oe[o2]):oe[o2])
+		                (o2==='ts'?''+new Date(oe[o2]):oe[o2])
 		                
                                                             )+'</td>';});
 
