@@ -16,13 +16,6 @@ function getXsS(url)
     cst.parentNode.insertBefore(e,cst);
 }
 
-function pleaseAuth()
-{
-  var ad = document.getElementById('authdiv');
-  ad.style.display='block';
-  var ah = '<a href="https://script.google.com/macros/s/AKfycbyCCC9y7-TiG0bqVGbKkaZVHOgLAow-QJt1GwpypbU/dev?action=auth&url='+window.location.href+'">here</a>';
-  ad.innerHTML = ad.innerHTML.replace(/LINKHTML/,ah);
-}
 </script>
 <title>drive-security-camera - video playback</title>
 <style>
@@ -42,15 +35,30 @@ function loadDates()
 	
 }
 </script>
+
+<body>
+<div id="status1"></div>
 <style>
   .authdiv{margin:1em 1em;padding:1em 1em;background:pink;color:red;font-family:helvetica;
   font-size:24px;display:none;}
 </style>
-<body>
-<div id="status1"></div>
 <div class="authdiv" id="authdiv">
   Please authenticate the script for Google Drive by clicking LINKHTML.
 </div>
+<script src="https://script.google.com/macros/s/AKfycbyCCC9y7-TiG0bqVGbKkaZVHOgLAow-QJt1GwpypbU/dev?action=authtest"></script>
+<script>
+function pleaseAuth()
+{
+  var ad = document.getElementById('authdiv');
+  ad.style.display='block';
+  var ah = '<a href="https://script.google.com/macros/s/AKfycbyCCC9y7-TiG0bqVGbKkaZVHOgLAow-QJt1GwpypbU/dev?action=auth&url='+window.location.href+'">here</a>';
+  ad.innerHTML = ad.innerHTML.replace(/LINKHTML/,ah);
+}
+setTimeout(function(){
+  if(window.authok){}
+  else{pleaseAuth();}
+},1000);
+</script>
 <div class="in1" style="border:1px solid silver;">
   <div>
     <div>Step 1: <button type="button" onclick="loadDates()">load dates of saved recordings</button></div>
@@ -65,13 +73,7 @@ function loadDates()
 
 
 
-<script src="https://script.google.com/macros/s/AKfycbyCCC9y7-TiG0bqVGbKkaZVHOgLAow-QJt1GwpypbU/dev?action=authtest"></script>
-<script>
-setTimeout(function(){
-  if(window.authok){}
-  else{pleaseAuth();}
-},1000);
-</script>
+
 </body>
 </html>
 <!-- 
