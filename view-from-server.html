@@ -25,20 +25,42 @@ div,.out{padding:.5em .5em;margin:.5em .5em; background:#def;}
 .out{display:inline-block;border:1px solid silver;min-height:1em;min-width:1em;}
 </style>
 <script>
+function log(message,clearint)
+{
+	document.getElementById('status1').innerHTML=message;
+	document.getElementById('status1').style.display='block';
+	if(clearint){setTimeout(function(){
+		document.getElementById('status1').style.display='none';
+		document.getElementById('status1').innerHTML='';
+	},clearint);}
+}
 function listDatesCb(datesa)
 {
+
 	var rtn = '';
 	for(var i = 0;i<datesa.length;i++)
 	{
 		rtn+='<option value="'+datesa[i]+'">'+datesa[i]+'</option>';	
 	}
 	document.getElementById('selectdate').innerHTML=rtn;
+	log('listed dates.',1000);
 }
 function listDates()
 {
-	filenames=false;
+	log('listing dates...');
 	getXsS('https://script.google.com/macros/s/AKfycbyCCC9y7-TiG0bqVGbKkaZVHOgLAow-QJt1GwpypbU/dev?action=list&cb=listDatesCb');
 	
+}
+function getDataCb(dataArray)
+{
+	log('got data. length='+dataArray.length,5000);
+}
+function getData()
+{
+	log('fetching data for selected date...');
+	var fn = document.getElementById('selectdate').value.replace(/.metadata/,'');
+	var u = 'https://script.google.com/macros/s/AKfycbyCCC9y7-TiG0bqVGbKkaZVHOgLAow-QJt1GwpypbU/dev?action=getdata&cb=getDataCb&_ts1_='+(new Date()).getTime()+'&fn='+fn+'.txt';
+	getXsS(u);
 }
 </script>
 
@@ -69,6 +91,7 @@ setTimeout(function(){
   <div>
     <div>Step 1: <button type="button" onclick="listDates();">list dates of saved recordings</button></div>
     <div>Step 2: <select id="selectdate" class="selectdate" value="click list dates above then select a date"><option>click list dates above then select a date</option></option></select></div>
+    <div>Step 3: <button type="button" onclick="getData();">get data for date</button></div>
   </div>
   <div>
 
