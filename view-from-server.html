@@ -59,7 +59,7 @@ function getData()
 {
 	log('fetching data for selected date...');
 	var fn = document.getElementById('selectdate').value.replace(/.metadata/,'');
-	var u = 'https://script.google.com/macros/s/AKfycbyCCC9y7-TiG0bqVGbKkaZVHOgLAow-QJt1GwpypbU/dev?action=getdata&cb=getDataCb&_ts1_='+(new Date()).getTime()+'&fn='+fn+'.txt';
+	var u = 'https://script.google.com/macros/s/AKfycbyCCC9y7-TiG0bqVGbKkaZVHOgLAow-QJt1GwpypbU/dev?action=getdata&cb=getDataCb&fn='+fn;
 	getXsS(u);
 }
 </script>
