@@ -54,7 +54,7 @@ function listDates()
 function getDataCb(dataArray)
 {
 	log('got data. length='+dataArray.length,5000);
-	document.getElementById('outputdiv').innerHTML=objectArrayToTable(dataArray);
+	document.getElementById('outputdiv').innerHTML=objectArrayToTable(dataArray,true);
 }
 function getData()
 {
@@ -104,7 +104,7 @@ setTimeout(function(){
 <script src="https://cdnjs.cloudflare.com/ajax/libs/underscore.js/1.6.0/underscore-min.js"></script>
 <script>
 	
-    function objectArrayToTable(o)
+    function objectArrayToTable(o,noescapevals)
     {
         var rtn = '<table><tr>';
         var headers = _.unique(_.flatten(_.map(o,function(e){return _.keys(e);}),true)).sort();
@@ -113,9 +113,19 @@ setTimeout(function(){
        
         _.each(o,function(oe){
             rtn+='<tr>'; 
-            _.each(headers,function(o2){rtn+='<td>'+_.escape(
-                _.isObject(oe[o2])?JSON.stringify(oe[o2]):oe[o2]
+            if(noescapevals)
+            {
+            	            _.each(headers,function(o2){rtn+='<td>'+(
+		                _.isObject(oe[o2])?JSON.stringify(oe[o2]):oe[o2]
                                                             )+'</td>';});
+
+            }else
+            {
+	            _.each(headers,function(o2){rtn+='<td>'+_.escape(
+        	        _.isObject(oe[o2])?JSON.stringify(oe[o2]):oe[o2]
+                                                            )+'</td>';});
+            	
+            }
             rtn+='</tr>';
         });
         rtn+='</table>';
