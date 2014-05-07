@@ -1,6 +1,7 @@
 <!DOCTYPE html>
 <html>
 <head>
+<!-- script src="//ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.min.js"></script-->
 <script>
 function getXsS(url)
 {
@@ -24,14 +25,19 @@ div,.out{padding:.5em .5em;margin:.5em .5em; background:#def;}
 .out{display:inline-block;border:1px solid silver;min-height:1em;min-width:1em;}
 </style>
 <script>
-window.working = false;
-var filenames = false;
-function whenresponse(cb){ var filenames = filenames || false; if(filenames){ cb(filenames); }else{ setTimeout(function(){whenresponse(cb);},1000); } };
-function loadDates()
+function listDatesCb(datesa)
+{
+	var rtn = '';
+	for(var i = 0;i<datesa.length;i++)
+	{
+		rtn+='<option value="'+datesa[i]+'">'+datesa[i]+'</option>';	
+	}
+	document.getElementById('selectdate').innerHTML=rtn;
+}
+function listDates()
 {
 	filenames=false;
-	getXsS('https://script.google.com/macros/s/AKfycbyCCC9y7-TiG0bqVGbKkaZVHOgLAow-QJt1GwpypbU/dev?action=load');
-	whenresponse(function(){alert(1);});
+	getXsS('https://script.google.com/macros/s/AKfycbyCCC9y7-TiG0bqVGbKkaZVHOgLAow-QJt1GwpypbU/dev?action=list&cb=listDatesCb');
 	
 }
 </script>
