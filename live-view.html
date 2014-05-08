@@ -91,12 +91,14 @@ function getMetadataCb(dataArray)
 {
 	log('got metadata. length='+dataArray.length,5000);
 	document.getElementById('outputdiv').innerHTML=objectArrayToTable(dataArray,true);
+	getData('&start='+dataArray.length);
 }
-function getData()
+function getData(append)
 {
 	log('fetching data for selected date...');
 	var fn = document.getElementById('selectdate').value.replace(/.metadata/,'');
 	var u = base_url+'?action=getdata&cb=getDataCb&fn='+fn;
+	if(append){u+=append;}
 	getXsS(u);
 }
 function getMetadata()
