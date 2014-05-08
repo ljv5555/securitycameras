@@ -75,6 +75,12 @@ function listDates()
 	getXsS(base_url+'?action=list&cb=listDatesCb');
 
 }
+function listLastDate()
+{
+	log('listing last date...');
+	getXsS(base_url+'?action=list&cb=listLastDateCb');
+
+}
 function getDataCb(dataArray)
 {
 	log('got data. length='+dataArray.length,5000);
@@ -82,7 +88,7 @@ function getDataCb(dataArray)
 }
 function getMetadataCb(dataArray)
 {
-	log('got data. length='+dataArray.length,5000);
+	log('got metadata. length='+dataArray.length,5000);
 	document.getElementById('outputdiv').innerHTML=objectArrayToTable(dataArray,true);
 }
 function getData()
