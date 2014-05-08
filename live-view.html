@@ -98,7 +98,7 @@ function getData(append)
 {
 	log('fetching data for selected date...');
 	var fn = document.getElementById('selectdate').value.replace(/.metadata/,'');
-	var u = base_url+'?action=getdata&cb=getDataCb&fn='+fn;
+	var u = base_url+'?action=getdatabyindex&cb=getDataCb&fn='+fn;
 	if(append){u+=append;}
 	getXsS(u);
 }
