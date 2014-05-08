@@ -11,6 +11,9 @@
 		font-size:10px;
 	}
 </style>
+<script>
+var base_url='https://script.google.com/macros/s/AKfycbxc7ySdofryyuxg4VakWFTcLmb4L_sDuYqTMruyd-QRvw-RUd4/exec;
+</script>
 <!-- script src="//ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.min.js"></script-->
 <script>
 function getXsS(url)
@@ -35,14 +38,14 @@ div,.out{padding:.5em .5em;margin:.5em .5em; background:#def;}
 .out{display:inline-block;border:1px solid silver;min-height:1em;min-width:1em;}
 </style>
 <script>
-function log(message,clearint)
+function log(message,clearinterval)
 {
 	document.getElementById('status1').innerHTML=message;
 	document.getElementById('status1').style.display='block';
-	if(clearint){setTimeout(function(){
+	if(clearinterval){setTimeout(function(){
 		document.getElementById('status1').style.display='none';
 		document.getElementById('status1').innerHTML='';
-	},clearint);}
+	},clearinterval);}
 }
 function listDatesCb(datesa)
 {
@@ -55,13 +58,29 @@ function listDatesCb(datesa)
 	document.getElementById('selectdate').innerHTML=rtn;
 	log('listed dates.',1000);
 }
+function listLastDateCb(datesa)
+{
+
+	var rtn = '';
+	for(var i = 0;i<datesa.length;i++)
+	{
+		if(i==(datesa.length-1)){rtn+='<option value="'+datesa[i]+'">'+datesa[i]+'</option>';}
+	}
+	document.getElementById('selectdate').innerHTML=rtn;
+	log('listed dates.',1000);
+}
 function listDates()
 {
 	log('listing dates...');
-	getXsS('https://script.google.com/macros/s/AKfycbxc7ySdofryyuxg4VakWFTcLmb4L_sDuYqTMruyd-QRvw-RUd4/exec?action=list&cb=listDatesCb');
+	getXsS(base_url+'?action=list&cb=listDatesCb');
 
 }
 function getDataCb(dataArray)
+{
+	log('got data. length='+dataArray.length,5000);
+	document.getElementById('outputdiv').innerHTML=objectArrayToTable(dataArray,true);
+}
+function getMetadataCb(dataArray)
 {
 	log('got data. length='+dataArray.length,5000);
 	document.getElementById('outputdiv').innerHTML=objectArrayToTable(dataArray,true);
@@ -70,7 +89,14 @@ function getData()
 {
 	log('fetching data for selected date...');
 	var fn = document.getElementById('selectdate').value.replace(/.metadata/,'');
-	var u = 'https://script.google.com/macros/s/AKfycbxc7ySdofryyuxg4VakWFTcLmb4L_sDuYqTMruyd-QRvw-RUd4/exec?action=getdata&cb=getDataCb&fn='+fn;
+	var u = base_url+'?action=getdata&cb=getDataCb&fn='+fn;
+	getXsS(u);
+}
+function getMetadata()
+{
+	log('fetching data for selected date...');
+	var fn = document.getElementById('selectdate').value.replace(/.metadata/,'');
+	var u = base_url+'?action=getmetadata&cb=getMetadataCb&fn='+fn;
 	getXsS(u);
 }
 </script>
@@ -149,13 +175,4 @@ setTimeout(function(){
 
 </body>
 </html>
-<!-- 
-doctype html>
-<html>
-<head></head>
-<body>
-<script src="https://script.google.com/macros/s/AKfycbyCCC9y7-TiG0bqVGbKkaZVHOgLAow-QJt1GwpypbU/dev?action=get"
-     onerror="window.open('https://script.google.com/macros/s/AKfycbyCCC9y7-TiG0bqVGbKkaZVHOgLAow-QJt1GwpypbU/dev?action=get');">
-</script>
-</body>
-</html-->
+
