@@ -58,7 +58,7 @@ function listDatesCb(datesa)
 function listDates()
 {
 	log('listing dates...');
-	getXsS('https://script.google.com/macros/s/AKfycbyCCC9y7-TiG0bqVGbKkaZVHOgLAow-QJt1GwpypbU/dev?action=list&cb=listDatesCb');
+	getXsS('https://script.google.com/macros/s/AKfycbxc7ySdofryyuxg4VakWFTcLmb4L_sDuYqTMruyd-QRvw-RUd4/exec?action=list&cb=listDatesCb');
 	
 }
 function getDataCb(dataArray)
@@ -70,7 +70,7 @@ function getData()
 {
 	log('fetching data for selected date...');
 	var fn = document.getElementById('selectdate').value.replace(/.metadata/,'');
-	var u = 'https://script.google.com/macros/s/AKfycbyCCC9y7-TiG0bqVGbKkaZVHOgLAow-QJt1GwpypbU/dev?action=getdata&cb=getDataCb&fn='+fn;
+	var u = 'https://script.google.com/macros/s/AKfycbxc7ySdofryyuxg4VakWFTcLmb4L_sDuYqTMruyd-QRvw-RUd4/exec?action=getdata&cb=getDataCb&fn='+fn;
 	getXsS(u);
 }
 </script>
@@ -84,13 +84,13 @@ function getData()
 <div class="authdiv" id="authdiv">
   Please authenticate the script for Google Drive by clicking LINKHTML.
 </div>
-<script src="https://script.google.com/macros/s/AKfycbyCCC9y7-TiG0bqVGbKkaZVHOgLAow-QJt1GwpypbU/dev?action=authtest"></script>
+<script src="https://script.google.com/macros/s/AKfycbxc7ySdofryyuxg4VakWFTcLmb4L_sDuYqTMruyd-QRvw-RUd4/exec?action=authtest"></script>
 <script>
 function pleaseAuth()
 {
   var ad = document.getElementById('authdiv');
   ad.style.display='block';
-  var ah = '<a href="https://script.google.com/macros/s/AKfycbyCCC9y7-TiG0bqVGbKkaZVHOgLAow-QJt1GwpypbU/dev?action=auth&url='+window.location.href+'">here</a>';
+  var ah = '<a href="https://script.google.com/macros/s/AKfycbxc7ySdofryyuxg4VakWFTcLmb4L_sDuYqTMruyd-QRvw-RUd4/exec?action=auth&url='+window.location.href+'">here</a>';
   ad.innerHTML = ad.innerHTML.replace(/LINKHTML/,ah);
 }
 setTimeout(function(){
