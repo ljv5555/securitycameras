@@ -101,7 +101,7 @@ function getData()
 function getMetadata()
 {
 	log('fetching data for selected date...');
-	var fn = document.getElementById('selectdate').value.replace(/.metadata/,'');
+	var fn = document.getElementById('selectdate').value/*.replace(/.metadata/,'')*/;
 	var u = base_url+'?action=getmetadata&cb=getMetadataCb&fn='+fn;
 	getXsS(u);
 }
