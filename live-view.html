@@ -90,7 +90,7 @@ function getDataCb(dataArray)
 function getMetadataCb(dataArray)
 {
 	log('got metadata. length='+dataArray.length,5000);
-	var lasti = dataArray.length-1;
+	var lasti = dataArray.length-2;
 	document.getElementById('outputdiv').innerHTML=objectArrayToTable(dataArray,true);
 	getData('&start='+lasti);
 }
