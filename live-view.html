@@ -58,10 +58,11 @@ function listDatesCb(datesa)
 	document.getElementById('selectdate').innerHTML=rtn;
 	log('listed dates.',1000);
 }
-function listLastDateCb(datesa)
+function listLastDateCb(datesau)
 {
 
 	var rtn = '';
+	var datesa = datesau.sort();
 	for(var i = 0;i<datesa.length;i++)
 	{
 		if(i==(datesa.length-1)){rtn+='<option value="'+datesa[i]+'">'+datesa[i]+'</option>';}
