@@ -43,8 +43,8 @@ function log(message,clearinterval)
 	document.getElementById('status1').innerHTML=message;
 	document.getElementById('status1').style.display='block';
 	if(clearinterval){setTimeout(function(){
-		document.getElementById('status1').style.display='none';
-		document.getElementById('status1').innerHTML='';
+		//document.getElementById('status1').style.display='none';
+		document.getElementById('status1').innerHTML='&nbsp;';
 	},clearinterval);}
 }
 function listDatesCb(datesa)
@@ -91,7 +91,7 @@ function getMetadataCb(dataArray)
 {
 	log('got metadata. length='+dataArray.length,5000);
 	var lasti = dataArray.length-2;
-	document.getElementById('outputdiv').innerHTML=objectArrayToTable(dataArray,true);
+	//document.getElementById('outputdiv').innerHTML=objectArrayToTable(dataArray,true);
 	getData('&start='+lasti);
 }
 function getData(append)
