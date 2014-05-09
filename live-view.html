@@ -139,6 +139,9 @@ setTimeout(function(){
     <div>Step 1: <button type="button" onclick="listLastDate();">list last date of saved recordings</button></div>
     <div>Step 2: <select id="selectdate" class="selectdate" value="click list dates above then select a date"><option>click list dates above then select a date</option></option></select></div>
     <div>Step 3: <button type="button" onclick="getMetadata();">get data for date</button></div>
+    <div>Step 4: <button type="button" onclick="window.int1=setInterval(function(){getMetadata();},10000);">get data every 10 seconds</button></div>
+    <div>Step 5: <button type="button" onclick="clearInterval(window.int1);">stop getting data every 10 seconds</button></div>
+    
   </div>
   <div id="outputdiv" class="outputdiv">
 
