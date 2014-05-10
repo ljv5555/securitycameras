@@ -11,6 +11,12 @@
 		font-size:10px;
 	}
 </style>
+<script src="//ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.min.js"></script>
+<script>
+  jQuery(function(){
+    jQuery('.tabs').load('tabs.html');
+    });
+</script>
 <script>
 var base_url='https://script.google.com/macros/s/AKfycbxc7ySdofryyuxg4VakWFTcLmb4L_sDuYqTMruyd-QRvw-RUd4/exec';
 </script>
@@ -113,6 +119,7 @@ function getMetadata()
 
 <body>
 <div id="status1"></div>
+<div class="tabs"></div>
 <style>
   .authdiv{margin:1em 1em;padding:1em 1em;background:pink;color:red;font-family:helvetica;
   font-size:24px;display:none;}
