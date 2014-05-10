@@ -1,6 +1,12 @@
 <!DOCTYPE html>
 <html>
 <head>
+<script src="//ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.min.js"></script>
+<script>
+  jQuery(function(){
+    jQuery('.tabs').load('tabs.html');
+    });
+</script>
 <script>
 function pleaseAuth()
 {
@@ -59,6 +65,7 @@ function capture()
 <div class="authdiv" id="authdiv">
   Please authenticate the script for Google Drive by clicking LINKHTML.
 </div>
+<div class="tabs"></div>
 <div class="in1" style="border:1px solid silver;">
   <div>
     <div>Step 1: <button type="button" onclick="getFrame()">get frame</button></div>
