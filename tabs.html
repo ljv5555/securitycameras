@@ -1,0 +1,30 @@
+<style>
+  div.tabdiv{
+  display:block; background-color:transparent;padding:5px 10% 5px 10%;
+  border-left:1px solid silver;
+  border-right:1px solid silver;
+  border-top:1px solid silver;
+  border-top-left-radius:5px;
+  border-top-right-radius:5px;
+
+  }
+  div.tabdiv > span > a,div.tabdiv > span > a:visited{
+    margin:2px 2px 2px 2px;
+    display:inline-block;
+    padding:5px 5px 5px 5px;
+    background-color:#333;
+    color:silver;
+    text-decoration:none;
+    border-top-left-radius:5px;
+    border-top-right-radius:5px;
+  }
+  div.tabdiv > span:target > a,div.tabdiv > span:target > a:visited{
+    background:#555;
+    text-decoration:underline;
+  }  
+</style>
+<div class="tabdiv">
+<span id="capture"><a href="capture-to-server.html#capture" >capture to server</a></span>
+<span id="view"><a href="view-from-server.html#view" >view from server</a></span>
+<span id="live"><a href="live-view.html#live" >view live</a></span>
+</div>
