@@ -1,0 +1,214 @@
+<!DOCTYPE html>
+<html>
+<head>
+<style>
+
+
+	.outputdiv > table td{
+		padding:5px 5px 5px 5px;
+		margin:5px 5px 5px 5px;
+		background: #78f;
+		color:#fff;
+		font-size:10px;
+	}
+</style>
+<script src="//ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.min.js"></script>
+<script>
+  jQuery(function(){
+    jQuery('.tabs').load('tabs.html');
+    });
+</script>
+<script>
+var base_url='https://script.google.com/macros/s/AKfycbxc7ySdofryyuxg4VakWFTcLmb4L_sDuYqTMruyd-QRvw-RUd4/exec';
+</script>
+<!-- script src="//ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.min.js"></script-->
+<script>
+function getXsS(url)
+{
+    var ss = 's' + 'cr' + 'ip' + 't';
+    var cst = document.getElementsByTagName(ss)[document.getElementsByTagName(ss).length-1];
+    var ts = 1*new Date();
+    var e = document.createElement(ss);
+    e.async=1;
+    var tsstr = '_ts1_='+ts;
+    if((''+url).indexOf('?')==-1){tsstr='?'+tsstr;}else{tsstr='&'+tsstr;}
+    var url2 = url+tsstr;
+    e.src=url2;
+    cst.parentNode.insertBefore(e,cst);
+}
+
+
+</script>
+<title>drive-security-camera - video playback</title>
+<style>
+body{font-family:arial;color:blue;}
+div,.out{padding:.5em .5em;margin:.5em .5em; background:#def;}
+.out{display:inline-block;border:1px solid silver;min-height:1em;min-width:1em;}
+</style>
+<script>
+function log(message,clearinterval)
+{
+	document.getElementById('status1').innerHTML=message;
+	document.getElementById('status1').style.display='block';
+	if(clearinterval){setTimeout(function(){
+		//document.getElementById('status1').style.display='none';
+		document.getElementById('status1').innerHTML='&nbsp;';
+	},clearinterval);}
+}
+function listDatesCb(datesa)
+{
+
+
+	var rtn = '';
+	for(var i = 0;i<datesa.length;i++)
+	{
+		rtn+='<option value="'+datesa[i]+'">'+datesa[i]+'</option>';	
+	}
+	document.getElementById('selectdate').innerHTML=rtn;
+	log('listed dates.',1000);
+}
+function listLastDateCb(datesau)
+{
+
+
+	var rtn = '';
+	var datesa = datesau.sort();
+	for(var i = 0;i<datesa.length;i++)
+	{
+		if(i==(datesa.length-1)){rtn+='<option value="'+datesa[i]+'">'+datesa[i]+'</option>';}
+	}
+	document.getElementById('selectdate').innerHTML=rtn;
+	log('listed last date.',1000);
+}
+function listDates()
+{
+	log('listing dates...');
+	getXsS(base_url+'?action=list&cb=listDatesCb');
+
+
+}
+function listLastDate()
+{
+	log('listing last date...');
+	getXsS(base_url+'?action=list&cb=listLastDateCb');
+
+
+}
+function getDataCb(dataArray)
+{
+	log('got data. length='+dataArray.length,5000);
+	document.getElementById('outputdiv').innerHTML=objectArrayToTable(dataArray,true);
+}
+function getMetadataCb(dataArray)
+{
+	log('got metadata. length='+dataArray.length,5000);
+	var lasti = dataArray.length-2;
+	//document.getElementById('outputdiv').innerHTML=objectArrayToTable(dataArray,true);
+	getData('&start='+lasti);
+}
+function getData(append)
+{
+	log('fetching data for selected date...');
+	var fn = document.getElementById('selectdate').value.replace(/.metadata/,'');
+	var u = base_url+'?action=getdatabyindex&cb=getDataCb&fn='+fn;
+	if(append){u+=append;}
+	getXsS(u);
+}
+function getMetadata()
+{
+	log('fetching data for selected date...');
+	var fn = document.getElementById('selectdate').value/*.replace(/.metadata/,'')*/;
+	var u = base_url+'?action=getmetadata&cb=getMetadataCb&fn='+fn;
+	getXsS(u);
+}
+</script>
+
+
+<body>
+<div id="status1"></div>
+<div class="tabs"></div>
+<style>
+  .authdiv{margin:1em 1em;padding:1em 1em;background:pink;color:red;font-family:helvetica;
+  font-size:24px;display:none;}
+</style>
+<div class="authdiv" id="authdiv">
+  Please authenticate the script for Google Drive by clicking LINKHTML.
+</div>
+<script src="https://script.google.com/macros/s/AKfycbxc7ySdofryyuxg4VakWFTcLmb4L_sDuYqTMruyd-QRvw-RUd4/exec?action=authtest"></script>
+<script>
+function pleaseAuth()
+{
+  var ad = document.getElementById('authdiv');
+  ad.style.display='block';
+  var ah = '<a href="https://script.google.com/macros/s/AKfycbxc7ySdofryyuxg4VakWFTcLmb4L_sDuYqTMruyd-QRvw-RUd4/exec?action=auth&url='+window.location.href+'">here</a>';
+  ad.innerHTML = ad.innerHTML.replace(/LINKHTML/,ah);
+}
+setTimeout(function(){
+  if(window.authok){}
+  else{pleaseAuth();}
+},1000);
+</script>
+<div class="in1" style="border:1px solid silver;">
+  <div>
+    <div>Step 1: <button type="button" onclick="listLastDate();">list last date of saved recordings</button></div>
+    <div>Step 2: <select id="selectdate" class="selectdate" value="click list dates above then select a date"><option>click list dates above then select a date</option></option></select></div>
+    <div>Step 3: <button type="button" onclick="getMetadata();">get data for date</button></div>
+    <div>Step 4: <button type="button" onclick="window.int1=setInterval(function(){getMetadata();},30000);">get data every 30 seconds</button></div>
+    <div>Step 5: <button type="button" onclick="clearInterval(window.int1);">stop getting data every 30 seconds</button></div>
+    
+  </div>
+  <div id="outputdiv" class="outputdiv">
+
+
+
+
+  </div>
+</div>
+
+
+
+
+<script src="https://cdnjs.cloudflare.com/ajax/libs/underscore.js/1.6.0/underscore-min.js"></script>
+<script>
+
+
+    function objectArrayToTable(o,noescapevals)
+    {
+        var rtn = '<table><tr>';
+        var headers = _.unique(_.flatten(_.map(o,function(e){return _.keys(e);}),true)).sort();
+        _.each(headers,function(o){rtn+='<th>'+_.escape(o)+'</th>';});
+        rtn+='</tr>';
+       
+        _.each(o,function(oe){
+            rtn+='<tr>'; 
+            if(noescapevals)
+            {
+            	            _.each(headers,function(o2){rtn+='<td>'+(
+		                _.isObject(oe[o2])?JSON.stringify(oe[o2]):
+
+
+		                (o2==='ts'?''+new Date(oe[o2]):oe[o2])
+
+
+                                                            )+'</td>';});
+
+
+            }else
+            {
+	            _.each(headers,function(o2){rtn+='<td>'+_.escape(
+        	        _.isObject(oe[o2])?JSON.stringify(oe[o2]):oe[o2]
+                                                            )+'</td>';});
+            	
+            }
+            rtn+='</tr>';
+        });
+        rtn+='</table>';
+        return rtn;
+    }
+
+
+</script>
+
+
+</body>
+</html>
