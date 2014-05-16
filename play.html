@@ -55,6 +55,18 @@ function log(message,clearinterval)
 		document.getElementById('status1').innerHTML='&nbsp;';
 	},clearinterval);}
 }
+function loga(message,clearinterval)
+{
+	document.getElementById('status1').innerHTML+='<p/><span style="color:blue;background:pink;display:inline-block;width:15%;overflow:hidden;font-size:10px;font-family:arial;">'
+						    +new Date()+'</span> &nbsp;&nbsp;&nbsp;&nbsp;'
+						    +'<span style="display:inline-block;width:60%;font-size:12px;font-family:arial;">'
+						    +message+'</span>\r\n';
+	document.getElementById('status1').style.display='block';
+	if(clearinterval){setTimeout(function(){
+		//document.getElementById('status1').style.display='none';
+		document.getElementById('status1').innerHTML='&nbsp;';
+	},clearinterval);}
+}
 function listDatesCb(datesa)
 {
 
@@ -121,6 +133,22 @@ function getMetadata()
 	var u = base_url+'?action=getmetadata&cb=getMetadataCb&fn='+fn;
 	getXsS(u);
 }
+function getDataForDate()
+{
+	log('fetching data for selected date...');
+	var fn = document.getElementById('selectdate').value.replace(/.metadata/,'');
+	var u = base_url+'?action=getmetadata&cb=getDataForDateCb&fn='+fn;
+	getXsS(u);
+}
+function getDataForDateCb(d)
+{
+	try{
+	window.dataForDate = JSON.parse(d);
+	}catch(e){log('error: '+e.message);return;}
+	log('Got data. Frames loaded: '+window.dataForDate.length;);
+	
+}
+
 </script>
 
 
@@ -150,9 +178,9 @@ setTimeout(function(){
 </script>
 <div class="in1" style="border:1px solid silver;">
   <div>
-    <div>Step 1: <button type="button" onclick="listLastDate();">list last date of saved recordings</button></div>
+    <div>Step 1: <button type="button" onclick="listDates();">list dates of saved recordings</button></div>
     <div>Step 2: <select id="selectdate" class="selectdate" value="click list dates above then select a date"><option>click list dates above then select a date</option></option></select></div>
-    <div>Step 3: <button type="button" onclick="getMetadata();">get data for date</button></div>
+    <div>Step 3: <button type="button" onclick="getDataForDate();">get data for date</button></div>
     <div>Step 4: <button type="button" onclick="window.int1=setInterval(function(){getMetadata();},30000);">get data every 30 seconds</button></div>
     <div>Step 5: <button type="button" onclick="clearInterval(window.int1);">stop getting data every 30 seconds</button></div>
     
