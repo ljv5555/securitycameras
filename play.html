@@ -137,7 +137,7 @@ function getDataForDate()
 {
 	log('fetching data for selected date...');
 	var fn = document.getElementById('selectdate').value.replace(/.metadata/,'');
-	var u = base_url+'?action=getmetadata&cb=getDataForDateCb&fn='+fn;
+	var u = base_url+'?action=getdata&cb=getDataForDateCb&fn='+fn;
 	getXsS(u);
 }
 function getDataForDateCb(d)
