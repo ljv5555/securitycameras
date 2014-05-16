@@ -171,7 +171,7 @@ function pleaseAuth()
   var ad = document.getElementById('authdiv');
   ad.style.display='block';
   var ah = '<a href="https://script.google.com/macros/s/AKfycbxc7ySdofryyuxg4VakWFTcLmb4L_sDuYqTMruyd-QRvw-RUd4/exec?action=auth&url='+window.location.href+'">here</a>';
-  ad.innerHTML = ad.innerHTML.replace(/LINKHTML/,ah);
+  ad.innerHTML = (''+ad.innerHTML).replace(/LINKHTML/,ah);
 }
 setTimeout(function(){
   if(window.authok){}
