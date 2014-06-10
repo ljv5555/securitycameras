@@ -54,7 +54,10 @@ function capture()
   
   }
 }
-
+function getCint()
+{
+  return Number(document.getElementById('cint').value);
+}
 </script>
 <style>
   .authdiv{margin:1em 1em;padding:1em 1em;background:pink;color:red;font-family:helvetica;
@@ -69,7 +72,8 @@ function capture()
 <div class="in1" style="border:1px solid silver;">
   <div>
     <div>Step 1: <button type="button" onclick="getFrame()">get frame</button></div>
-    <div>Step 2: <button type="button" onclick="window.cint=setInterval(function(){capture();},1000);">capture video</button></div>
+    <div>Step 2: <button type="button" onclick="window.cint=setInterval(function(){capture();},getCint());">capture video</button></div>
+    <input id="cint" type="number" value="10000" min="1000" max="60000" step="1000"/>
     <!--input style="width:500px;" id="txt1"/ -->
     <div>Step 3: <button type="button" onclick="if(window.cint)clearInterval(window.cint);">stop capture</button></div>
     <div>Step 4: <a href="view-from-server.html">view from server</a></div>
