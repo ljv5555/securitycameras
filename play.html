@@ -182,7 +182,7 @@ function getDataForDateCb(d)
 	try{
 	window.dataForDateJ = d;
 	addrange(dataForDateJ,function(d){
-		$('.out1').text('ts='+d.ts);
+		$('.out1').text('d='+JSON.stringify(d));
 		$('.out2').html(d.data);
 	});
 	}catch(e){log('error: '+e.message);return;}
