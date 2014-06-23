@@ -56,7 +56,7 @@ $(function(){
     r.on('keydown',uval);
     uval();
     window.sf.minus=function(){r.val(r.val()<r.attr('min')?0:r.val()-1);uval();};
-    window.sf.plus=function(){r.val(r.val()>r.attr('max')?r.attr('max'):r.val()+1);uval();};
+    window.sf.plus=function(){r.val(r.val()>r.attr('max')?r.attr('max'):Number(r.val())+1);uval();};
 });
 }
 
