@@ -10,7 +10,18 @@
 		background: #78f;
 		color:#fff;
 		font-size:10px;
+	
 	}
+	
+	
+.ps>div{text-align:center;}
+.ps{
+    border-radius:4px;border:1px solid #ddd;
+    padding:5px;
+}
+.ps input[type="range"]{width:90%;
+margin:5px;}
+.ps table{width:100%}
 </style>
 <script src="//ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.min.js"></script>
 <script>
@@ -21,8 +32,34 @@
 <script>
 var base_url='https://script.google.com/macros/s/AKfycbxc7ySdofryyuxg4VakWFTcLmb4L_sDuYqTMruyd-QRvw-RUd4/exec';
 </script>
-<!-- script src="//ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.min.js"></script-->
+<script src="//ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/underscore.js/1.6.0/underscore-min.js"></script>
+
 <script>
+function addrange(dta,vcl)
+{
+window.dta=dta || ['a','b','c','d','e','f'];
+window.sf={};
+window.sf.vcl=vcl || function(v){};
+
+$(function(){
+    window.sf.r = $('input[type="range"]');
+    window.sf.sv = $('#sv');
+    var r = window.sf.r;
+    var sv = window.sf.sv;
+    r.attr('max',window.dta.length-1);
+    window.sf.uval=function(){sv.text(window.dta[r.val()]);window.sf.vcl(r.val());};
+    var uval = window.sf.uval;
+    r.on('change',uval);
+    r.on('mousemove',uval);
+    r.on('mousemove',uval);
+    r.on('keydown',uval);
+    uval();
+    window.sf.minus=function(){r.val(r.val()<r.attr('min')?0:r.val()-1);uval();};
+    window.sf.plus=function(){r.val(r.val()>r.attr('max')?r.attr('max'):r.val()+1);uval();};
+});
+}
+
 function getXsS(url)
 {
     var ss = 's' + 'cr' + 'ip' + 't';
@@ -188,6 +225,16 @@ setTimeout(function(){
     <div>Step 5: <button type="button" onclick="clearInterval(window.int1);">stop getting data every 30 seconds</button></div>
     
   </div>
+  <div class="ps">
+    <table><tr>
+        <td><input type="button" value="-" 
+            onclick="window.sf.minus();"/></td>
+        <td><input type="range" min="0" max="1" step="1" value="0"/></td>
+        <td><input type="button" value="+" 
+            onclick="window.sf.plus();"/></td>
+        </tr></table>
+    <div><span id="sv"></span></div>
+</div>
   <div id="outputdiv" class="outputdiv">
 
 
@@ -199,7 +246,6 @@ setTimeout(function(){
 
 
 
-<script src="https://cdnjs.cloudflare.com/ajax/libs/underscore.js/1.6.0/underscore-min.js"></script>
 <script>
 
 
