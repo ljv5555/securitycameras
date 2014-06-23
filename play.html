@@ -181,6 +181,10 @@ function getDataForDateCb(d)
 {
 	try{
 	window.dataForDateJ = d;
+	addrange(dataForDateJ,function(d){
+		$('.out1').text(new Date(d.ts));
+		$('.out2').html(d.data);
+	});
 	}catch(e){log('error: '+e.message);return;}
 	
 	
@@ -237,7 +241,7 @@ setTimeout(function(){
 </div>
   <div id="outputdiv" class="outputdiv">
 
-
+<div class="out1"></div><div class="out2"></div>
 
 
   </div>
